@@ -1,0 +1,36 @@
+﻿@model List<WebApplication3.Models.Employee>
+
+<h2 class="text-center text-primary my-4">Employee List</h2>
+
+<table class="table table-striped table-bordered shadow">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Position</td>
+                <td>$@employee.Salary.ToString("N2")</td> <!-- Format salary with 2 decimal places -->
+                <td>
+                    <a href="@Url.Action("Edit", "Employee", new { id = employee.Id })" class="btn btn-sm btn-warning">✏ Edit</a>
+                    <a href="@Url.Action("Delete", "Employee", new { id = employee.Id })"
+                       class="btn btn-sm btn-danger"
+                       onclick="return confirm('Are you sure you want to delete this employee?');">
+                        ❌ Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center mt-4">
+    <a href="@Url.Action("Create", "Employee")" class="btn btn-success">➕ Create New Employee</a>
+</div>
